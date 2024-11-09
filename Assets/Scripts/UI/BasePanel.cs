@@ -285,7 +285,7 @@ public class BasePanel : MonoBehaviour
     public async UniTask<string> GetCurrentCityName()
     {
         PlaceInfo info = await GetInfoByCoord(loc.currentLocation);
-        if (!(string.IsNullOrEmpty(info.province)) && !(string.IsNullOrEmpty(info.city)))
+        if (info!=null && !(string.IsNullOrEmpty(info.province)) && !(string.IsNullOrEmpty(info.city)))
         {
             if (info.province.Contains("Hong Kong"))
                 info.city = info.province;
