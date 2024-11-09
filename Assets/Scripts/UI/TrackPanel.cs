@@ -435,7 +435,10 @@ public class TrackPanel : BasePanel
 
     public async UniTask OnExitTrack()
     {
-        await pathpanel.ExitTrack();
+        if (pathpanel != null)
+        {
+            await pathpanel.ExitTrack();
+        }
         uijoystick.HideTrack();
         HideCurrentTrackUI();
         await UniTask.NextFrame();
@@ -450,7 +453,10 @@ public class TrackPanel : BasePanel
             tg.ShowTrack(index);
             if (aviltracks.Count > 0)
             {
-                pathpanel.ShowTrack(aviltracks[index]);
+                if (pathpanel != null)
+                {
+                    pathpanel.ShowTrack(aviltracks[index]);
+                }
                 uijoystick.ShowTrack(aviltracks[index]);
                 ShowCurrentTrackUI(aviltracks[index]);
             }

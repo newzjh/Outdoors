@@ -43,7 +43,7 @@ namespace GoShared {
 		// Use this for initialization
 		async void Start () {
 
-            if ((Application.isEditor || !Application.isMobilePlatform) && motionMode != MotionMode.UnityRemote) {
+            if ((Application.isEditor || !Application.isMobilePlatform || Application.platform == RuntimePlatform.WebGLPlayer) && motionMode != MotionMode.UnityRemote) {
 				useLocationServices = false;
 			}
 
