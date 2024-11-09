@@ -33,10 +33,12 @@ public class SearchPanel : BasePanel
             od.text = e.ToString();
             dd.options.Add(od);
         }
+        dd.value = (int)LocationManagerEnums.DemoLocation.HongKong;
 
         tTipsPanel = transform.Find("SearchTips");
 
         inputfield = transform.GetComponentInChildren<InputField>();
+        inputfield.text = "";
     }
 
     public void OnSelectLocation()
@@ -71,7 +73,10 @@ public class SearchPanel : BasePanel
 
         string url = "https://restapi.amap.com/v3/assistant/inputtips?output=xml&city=" + cityname + "&keywords=" + keywords + "&location=" + locstr + "&output=JSON&key=e9b198eacdefaa58075429316cd7ad12";
         tasks.Enqueue(url);
-        string str2 = await GetTextFromURL(url); ;
+        string str2 = await GetTextFromURL(url);
+        if (string.IsNullOrEmpty(str2) || str2.Contains("USER_DAILY_QUERY_OVER_LIMIT"))
+            return;
+
         var top = tasks.Dequeue();
         if (top != url)
             return;
